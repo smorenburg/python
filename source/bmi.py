@@ -36,11 +36,15 @@ while True:
             system=system,
             height=height
         )
-        print(f"Your BMI is {bmi}.")
+        print(
+            f"Your BMI is {bmi}."
+        )
         break
     elif system.startswith('m'):
         bmi = calculate_bmi(weight, height)
-        print(f"Your BMI is {bmi}.")
+        print(
+            f"Your BMI is {bmi}."
+        )
         break
     else:
         print(
