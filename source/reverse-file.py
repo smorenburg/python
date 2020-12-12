@@ -4,9 +4,7 @@ import argparse
 
 # Build the parser
 parser = argparse.ArgumentParser(
-    description=str(
-        'reverse-file: Read a file in reverse.'
-    )
+    description='reverse-file: Read a file in reverse.'
 )
 parser.add_argument(
     '--filename',
