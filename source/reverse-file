@@ -3,7 +3,6 @@
 import argparse
 import sys
 
-# Build the parser
 parser = argparse.ArgumentParser(
     description='reverse-file: Read a file in reverse.'
 )
