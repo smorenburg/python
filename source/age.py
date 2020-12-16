@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 
 name = input("What is your name? ")
 birthdate = input("What is your birthdate? ")
