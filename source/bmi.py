@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 
 # BMI = (Weight in kilograms / Height in meters squared)
 # Imperial version: BMI * 703
