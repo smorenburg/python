@@ -10,7 +10,12 @@ setup(
     long_description=readme,
     author='Robin Smorenburg',
     author_email='robin@smorenburg.io',
-    install_requires=[],
+    install_requires=['boto3'],
     packages=find_packages('source'),
-    package_dir={'': 'source'}
+    package_dir={'': 'source'},
+    entry_points={
+        'console_scripts': [
+            'pgbackup=pgbackup.cli:main'
+        ]
+    }
 )
