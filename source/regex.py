@@ -70,3 +70,22 @@ content = handle.read()
 handle.close()
 matches = re.findall(r'From (\S+@\S+)', content)
 print(matches)
+
+
+handle = open('mbox-short.txt')
+content = handle.read()
+handle.close()
+matches = re.findall(r'^From .*@([^ ]*)', content)
+print(matches)
+
+
+handle = open('mbox-short.txt')
+numlist = list()
+for line in handle:
+    line = line.rstrip()
+    matches = re.findall(r'^X-DSPAM-Confidence: ([0-9.]+)', line)
+    if len(matches) != 1:
+        continue
+    num = float(matches[0])
+    numlist.append(num)
+print('Maximum:', max(numlist))
