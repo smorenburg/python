@@ -5,7 +5,7 @@ import json
 import ssl
 
 api_key = ''
-service_url = f'https://maps.googleapis.com/maps/api/geocode/json?'
+api_url = f'https://maps.googleapis.com/maps/api/geocode/json?'
 
 while True:
     address = input('Enter location: ')
@@ -18,7 +18,7 @@ while True:
 
     ssl_context = ssl.SSLContext()
 
-    url = service_url + \
+    url = api_url + \
         urllib.parse.urlencode({'address': address}) + \
         f'&key={api_key}'
 
