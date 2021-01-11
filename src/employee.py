@@ -1,3 +1,11 @@
+class MissingEmployeeError(Exception):
+    pass
+
+
+class DatabaseError(Exception):
+    pass
+
+
 class Employee:
     """
     """
@@ -5,17 +13,22 @@ class Employee:
     default_db_file = 'employee_file.txt'
 
     @classmethod
-    def get_all(cls, file_name=None):
+    def get_all(cls, line_number, file_name=None):
         results = []
 
         if not file_name:
             file_name = cls.default_db_file
 
-        with open(file_name, 'r') as f:
-            lines = [
-                line.strip('\n').split(',') + [index + 1]
-                for index, line in enumerate(f.readlines())
-            ]
+        try:
+            with open(file_name, 'r') as f:
+                lines = [
+                    line.strip('\n').split(',') + [index + 1]
+                    for index, line in enumerate(f.readlines())
+                ]
+        except (FileNotFoundError, PermissionError) as err:
+            raise DatabaseError(err)
+        except IndexError:
+            raise MissingEmployeeError(f'no employee at line {line_number}')
 
         for line in lines:
             results.append(cls(*line))
@@ -27,12 +40,15 @@ class Employee:
         if not file_name:
             file_name = cls.default_db_file
 
-        with open(file_name, 'r') as f:
-            line = [
-                line.strip('\n').split(',') + [index + 1]
-                for index, line in enumerate(f.readlines())
-            ][line_number - 1]
-            return cls(*line)
+        try:
+            with open(file_name, 'r') as f:
+                line = [
+                    line.strip('\n').split(',') + [index + 1]
+                    for index, line in enumerate(f.readlines())
+                ][line_number - 1]
+                return cls(*line)
+        except (FileNotFoundError, PermissionError) as err:
+            raise DatabaseError(err)
 
     def __init__(self, name, email_address, title, phone_number=None, identifier=None):
         self.name = name
@@ -51,14 +67,19 @@ class Employee:
         if not file_name:
             file_name = self.default_db_file
 
-        with open(file_name, 'r+') as f:
-            lines = f.readlines()
-            if self.identifier:
-                lines[self.identifier - 1] = self._database_line()
-            else:
-                lines.append(self._database_line())
-            f.seek(0)
-            f.writelines(lines)
+        try:
+            with open(file_name, 'r+') as f:
+                lines = f.readlines()
+                if self.identifier:
+                    lines[self.identifier - 1] = self._database_line()
+                else:
+                    lines.append(self._database_line())
+                f.seek(0)
+                f.writelines(lines)
+        except (FileNotFoundError, PermissionError) as err:
+            raise DatabaseError(err)
+        except IndexError:
+            raise MissingEmployeeError(f'no employee at {self.identifier}')
 
     def _database_line(self):
         return (
