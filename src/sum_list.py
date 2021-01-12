@@ -5,11 +5,11 @@ def sum_list(nums):
     >>> sum_list([10, 200, 33, 55])
     298
     """
-    index = 0
+    idx = 0
     total = 0
 
-    while index < len(nums):
-        total += nums[index]
-        index += 1
+    while idx < len(nums):
+        total += nums[idx]
+        idx += 1
 
     return total

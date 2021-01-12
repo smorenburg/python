@@ -9,15 +9,15 @@ def validate_subsequence_for_loop(array, sequence):
     >>> validate_subsequence_for_loop(array, sequence)
     False
     """
-    seq_point = 0
+    seq_idx = 0
 
     for value in array:
-        if seq_point == len(sequence):
+        if seq_idx == len(sequence):
             break
-        if sequence[seq_point] == value:
-            seq_point += 1
+        if sequence[seq_idx] == value:
+            seq_idx += 1
 
-    return seq_point == len(sequence)
+    return seq_idx == len(sequence)
 
 
 def validate_subsequence_while_loop(array, sequence):
@@ -31,12 +31,12 @@ def validate_subsequence_while_loop(array, sequence):
     >>> validate_subsequence_for_loop(array, sequence)
     False
     """
-    arr_point = 0
-    seq_point = 0
+    arr_idx = 0
+    seq_idx = 0
 
-    while arr_point < len(array) and seq_point < len(sequence):
-        if array[arr_point] == sequence[seq_point]:
-            seq_point += 1
-        arr_point += 1
+    while arr_idx < len(array) and seq_idx < len(sequence):
+        if array[arr_idx] == sequence[seq_idx]:
+            seq_idx += 1
+        arr_idx += 1
 
-    return seq_point == len(sequence)
+    return seq_idx == len(sequence)

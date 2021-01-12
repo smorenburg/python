@@ -9,16 +9,16 @@ def generate_list(start, end, step):
     >>> generate_list(10, 5, -2)
     [10, 8, 6]
     """
-    index = start
+    idx = start
     lst = []
 
-    if index < end:
-        while index < end:
-            lst.append(index)
-            index += step
+    if idx < end:
+        while idx < end:
+            lst.append(idx)
+            idx += step
     else:
-        while index > end:
-            lst.append(index)
-            index += step
+        while idx > end:
+            lst.append(idx)
+            idx += step
 
     return lst
