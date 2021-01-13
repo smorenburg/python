@@ -10,7 +10,7 @@ def func_r(a):
 
 
 # f(0) = f(1) = f(n) = f(n - 1) + F(n - 2)
-def fib(n):
+def fib(num):
     """
     >>> fib(5)
     5
@@ -21,12 +21,12 @@ def fib(n):
     >>> fib(20)
     6765
     """
-    if n == 0:
+    if num == 0:
         return 0
-    elif n == 1:
+    elif num == 1:
         return 1
     else:
-        return fib(n - 1) + fib(n - 2)
+        return fib(num - 1) + fib(num - 2)
 
 
 def reverse(string):
@@ -54,21 +54,6 @@ def print_list(lst):
     else:
         print(lst[0])
         print_list(lst[1:])
-
-
-def is_in_list(num, lst):
-    """
-    >>> is_in_list(4, [1, 2, 3, 4, 5])
-    True
-    >>> is_in_list(6, [1, 2, 3, 4, 5])
-    False
-    >>> is_in_list(5, [5, 4, 3, 2, 1])
-    True
-    """
-    if not lst:
-        return False
-    else:
-        return lst[0] == num or is_in_list(num, lst[1:])
 
 
 def is_increasing(lst):
@@ -103,3 +88,37 @@ def filter_gt_num(lst, num):
         return [lst[0]] + filter_gt_num(lst[1:], num)
     else:
         return filter_gt_num(lst[1:], num)
+
+
+def is_in_list(num, lst):
+    """
+    >>> is_in_list(4, [1, 2, 3, 4, 5])
+    True
+    >>> is_in_list(6, [1, 2, 3, 4, 5])
+    False
+    >>> is_in_list(5, [5, 4, 3, 2, 1])
+    True
+    """
+    if not lst:
+        return False
+    else:
+        return lst[0] == num or is_in_list(num, lst[1:])
+
+
+def intersection(lst1, lst2):
+    """
+    >>> intersection([1, 2, 3], [2, 4, 6])
+    [2]
+    >>> intersection([1, 2, 3], [4, 5, 6])
+    []
+    >>> intersection([2, 3, 2, 4], [2, 2, 4])
+    [2, 4]
+    """
+    if lst1 == []:
+        return []
+    if is_in_list(lst1[0], intersection(lst1[1:], lst2)):
+        return intersection(lst1[1:], lst2)
+    if is_in_list(lst1[0], lst2):
+        return [lst1[0]] + intersection(lst1[1:], lst2)
+    else:
+        return intersection(lst1[1:], lst2)
